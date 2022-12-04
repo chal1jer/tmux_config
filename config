@@ -1,0 +1,80 @@
+# Setting the prefix from C-b to C-a
+set-option -g prefix C-a
+
+# Free the original Ctrl-b prefix keybinding
+unbind C-b
+
+# Set base index for windows to 1 instead of 0
+set -g base-index 1
+
+# Set base index for panes to 1 instead of 0
+set -g pane-base-index 1
+
+# Set the delay between prefix and command
+set -s escape-time 1
+
+# Ensure that we can send Ctrl-A to other apps
+bind C-a send-prefix
+
+# Reload the file with Prefix r
+bind r source-file ~/.tmux.conf \; display "Reloaded!"
+
+# Splitting panes with | and -
+bind | split-window -h
+bind - split-window -v
+
+# Quick window selection
+bind -r C-h select-window -t :-
+bind -r C-l select-window -t :+
+
+# Set the default terminal mode to 256 color mode
+set -g default-terminal "screen-256color"
+
+# Set the statu's line colors
+set -g status-style fg=white,bg=black
+
+# Set the color of the window style
+setw -g window-status-style fg=cyan,bg=black
+
+# Set colors for the active window
+setw -g window-status-current-style fg=white,bold,bg=red
+
+# Colors for pane borders
+setw -g pane-border-style fg=green,bg=black
+setw -g pane-active-border-style fg=white,bg=yellow
+
+# Active pane normal, other shaded out
+setw -g window-style fg=colour240,bg=colour235
+setw -g window-active-style fg=white,bg=black
+
+# Command / message Line
+setw -g message-style fg=white,bold,bg=black
+
+# Activity monitoring
+setw -g monitor-activity on
+set -g visual-activity on
+
+# Set status bar
+#set -g status-bg black
+#set -g status-fg white
+#set -g status-left ""
+#set -g status-right "#[fg=green]#H"
+
+# Rather than constraining window size to the maximum size of any client 
+# connected to the *session*, constrain window size to the maximum size of any 
+# client connected to *that window*. Much more reasonable.
+#setw -g aggressive-resize on
+
+# Allows us to use C-a a <command> to send commands to a TMUX session inside 
+# another TMUX session
+#bind-key a send-prefix
+
+# Activity monitoring
+#setw -g monitor-activity on
+#set -g visual-activity on
+
+# Example of using a shell command in the status line
+#set -g status-right "#[fg=yellow]#(uptime | cut -d ',' -f 2-)"
+
+# Highlight active window
+#set-window-option -g window-status-current-bg red
